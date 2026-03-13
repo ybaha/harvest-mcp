@@ -10,8 +10,9 @@ export function registerProjectTools(server: McpServer) {
       inputSchema: {
         client_id: z.number().optional().describe("Filter by client ID"),
         is_active: z.boolean().optional().describe("Filter by active status"),
+        updated_since: z.string().optional().describe("Only projects updated after this datetime (ISO 8601)"),
         page: z.number().optional().describe("Page number"),
-        per_page: z.number().optional().describe("Results per page"),
+        per_page: z.number().optional().describe("Results per page (max 2000)"),
       },
     },
     async (params) => {

@@ -17,11 +17,13 @@ export async function harvestRequest(
 ): Promise<unknown> {
   const { method = "GET", params, body } = options;
 
+  const KEY_MAP: Record<string, string> = { from_date: "from", to_date: "to" };
+
   let url = `${BASE_URL}${path}`;
   if (params) {
     const qs = Object.entries(params)
       .filter(([, v]) => v !== undefined && v !== null)
-      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`)
+      .map(([k, v]) => `${encodeURIComponent(KEY_MAP[k] ?? k)}=${encodeURIComponent(String(v))}`)
       .join("&");
     if (qs) url += `?${qs}`;
   }

@@ -9,8 +9,9 @@ export function registerUserTools(server: McpServer) {
       description: "List all users",
       inputSchema: {
         is_active: z.boolean().optional().describe("Filter by active status"),
+        updated_since: z.string().optional().describe("Only users updated after this datetime (ISO 8601)"),
         page: z.number().optional().describe("Page number"),
-        per_page: z.number().optional().describe("Results per page"),
+        per_page: z.number().optional().describe("Results per page (max 2000)"),
       },
     },
     async (params) => {
@@ -39,9 +40,9 @@ export function registerUserTools(server: McpServer) {
       description: "List project assignments for a user — shows which project/task combos are available",
       inputSchema: {
         user_id: z.number().optional().describe("User ID (defaults to authenticated user via /users/me)"),
-        is_active: z.boolean().optional().describe("Filter by active status"),
+        updated_since: z.string().optional().describe("Only assignments updated after this datetime (ISO 8601)"),
         page: z.number().optional().describe("Page number"),
-        per_page: z.number().optional().describe("Results per page"),
+        per_page: z.number().optional().describe("Results per page (max 2000)"),
       },
     },
     async ({ user_id, ...params }) => {

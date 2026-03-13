@@ -9,8 +9,9 @@ export function registerTaskTools(server: McpServer) {
       description: "List all tasks",
       inputSchema: {
         is_active: z.boolean().optional().describe("Filter by active status"),
+        updated_since: z.string().optional().describe("Only tasks updated after this datetime (ISO 8601)"),
         page: z.number().optional().describe("Page number"),
-        per_page: z.number().optional().describe("Results per page"),
+        per_page: z.number().optional().describe("Results per page (max 2000)"),
       },
     },
     async (params) => {

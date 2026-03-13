@@ -15,10 +15,12 @@ export function registerTimeEntryTools(server: McpServer) {
         is_billed: z.boolean().optional().describe("Filter by billed status"),
         is_running: z.boolean().optional().describe("Filter by running status"),
         approval_status: z.string().optional().describe("Filter by approval status"),
+        external_reference_id: z.string().optional().describe("Filter by external reference ID"),
+        updated_since: z.string().optional().describe("Only entries updated after this datetime (ISO 8601)"),
         from_date: z.string().optional().describe("Start date (YYYY-MM-DD)"),
         to_date: z.string().optional().describe("End date (YYYY-MM-DD)"),
         page: z.number().optional().describe("Page number"),
-        per_page: z.number().optional().describe("Results per page (max 100)"),
+        per_page: z.number().optional().describe("Results per page (max 2000)"),
       },
     },
     async (params) => {
